@@ -38,7 +38,11 @@
     <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
-
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-runtime</artifactId>
+                <version>4.0.2</version>
+            </dependency>
             <!-- SpringBoot的依赖配置-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

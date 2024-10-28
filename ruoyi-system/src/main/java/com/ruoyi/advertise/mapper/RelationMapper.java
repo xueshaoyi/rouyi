@@ -1,18 +1,18 @@
 package com.ruoyi.advertise.mapper;
 
-import com.ruoyi.advertise.domain.AdvSpace;
+import com.ruoyi.advertise.domain.AdvRelation;
 
 import java.util.List;
 
-public interface SpaceMapper {
+public interface RelationMapper {
 
-    public List<AdvSpace> selectSpaceList(AdvSpace advSpace);
+    public List<AdvRelation> selectRelationList(AdvRelation advRelation);
 
-    public int insertSpace(AdvSpace advSpace);
+    public int insertRelation(AdvRelation advRelation);
 
-    public int deleteSpaceById(long id);
+    public int deleteRelationById(long id);
 
-    AdvSpace getSpaceById(Long id);
+    AdvRelation getRelationById(Long id);
 
-    int updateSpace(AdvSpace space);
+    int updateRelation(AdvRelation relation);
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.advertise.mapper.RelationMapper">
+
+    <resultMap type="AdvRelation" id="AdvRelationResult">
+        <id     property="id"     column="id"     />
+        <result property="companyId"   column="company_id"   />
+        <result property="companyName"   column="company_name"   />
+        <result property="spaceId"   column="space_id"   />
+        <result property="spaceName"   column="space_name"   />
+        <result property="isDelete"     column="is_delete"      />
+        <result property="createUser"   column="create_user"   />
+        <result property="createTime" column="create_time" />
+        <result property="updateUser"   column="update_user"   />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectAdvRelationVo">
+        select *
+        from adv_relation
+    </sql>
+    <update id="updateRelation">
+        update adv_relation
+        <set>
+            <if test="companyId != null">company_id = #{companyId},</if>
+            <if test="companyName != null and companyName != ''">company_name = #{companyName},</if>
+            <if test="spaceId != null">space_id = #{spaceId},</if>
+            <if test="spaceName != null and spaceName != ''">space_name = #{spaceName},</if>
+            <if test="isDelete != null ">is_delete = #{isDelete},</if>
+            <if test="updateUser != null and updateUser != ''">update_user = #{updateUser},</if>
+            update_time = sysdate()
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectRelationList" parameterType="AdvRelation" resultMap="AdvRelationResult">
+        <include refid="selectAdvRelationVo"/>
+        <where>
+            is_delete = 0
+        </where>
+    </select>
+    <select id="getRelationById" resultMap="AdvRelationResult">
+        <include refid="selectAdvRelationVo"></include>
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <delete id="deleteRelationById" parameterType="Long">
+        delete from adv_relation  where id = #{id}
+    </delete>
+
+    <insert id="insertRelation" parameterType="AdvRelation">
+        insert into adv_relation(
+        <if test="companyId != null">company_id,</if>
+        <if test="companyName != null and companyName != ''">company_name,</if>
+        <if test="spaceId != null">space_id,</if>
+        <if test="spaceName != null and spaceName != ''">space_name,</if>
+        <if test="createUser != null and createUser != ''">create_user,</if>
+        create_time,
+        update_time
+        )values(
+        <if test="companyId != null">#{companyId},</if>
+        <if test="companyName != null and companyName != ''">#{companyName},</if>
+        <if test="spaceId != null">#{spaceId},</if>
+        <if test="spaceName != null and spaceName != ''">#{spaceName},</if>
+        <if test="createUser != null and createUser != ''">#{createUser},</if>
+        sysdate(),
+        sysdate()
+        )
+    </insert>
+
+</mapper>

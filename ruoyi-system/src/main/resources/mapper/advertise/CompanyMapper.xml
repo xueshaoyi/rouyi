@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.advertise.mapper.CompanyMapper">
+
+    <resultMap type="AdvCompany" id="AdvCompanyResult">
+        <id     property="id"     column="id"     />
+        <result property="companyName"   column="company_name"   />
+        <result property="className"   column="class_name"   />
+        <result property="loadModel"   column="load_model"   />
+        <result property="serialModel"   column="serial_model"   />
+        <result property="isDelete"     column="is_delete"      />
+        <result property="createUser"   column="create_user"   />
+        <result property="createTime" column="create_time" />
+        <result property="updateUser"   column="update_user"   />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectAdvCompanyVo">
+        select *
+        from adv_company
+    </sql>
+    <update id="updateCompany">
+        update adv_company
+        <set>
+            <if test="companyName != null and companyName != ''">company_name = #{companyName},</if>
+            <if test="className != null and className != ''">class_name = #{className},</if>
+            <if test="updateUser != null and updateUser != ''">update_user = #{updateUser},</if>
+            <if test="loadModel != null">load_model = #{loadModel},</if>
+            <if test="serialModel != null ">serial_model = #{serialModel},</if>
+            update_time = sysdate()
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectCompanyList" parameterType="AdvCompany" resultMap="AdvCompanyResult">
+        <include refid="selectAdvCompanyVo"/>
+        <where>
+            <if test="companyName != null and companyName != ''">
+                AND company_name like concat('%', #{companyName}, '%')
+            </if>
+            <if test="className != null and className != ''">
+                AND class_name like concat('%', #{className}, '%')
+            </if>
+            and is_delete = 0
+        </where>
+    </select>
+    <select id="getCompanyById" resultMap="AdvCompanyResult">
+        <include refid="selectAdvCompanyVo"></include>
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <delete id="deleteCompanyById" parameterType="Long">
+        update adv_company set is_delete = 1 where id = #{id}
+    </delete>
+
+
+    <insert id="insertCompany" parameterType="AdvCompany">
+        insert into adv_company(
+        <if test="companyName != null and companyName != ''">company_name,</if>
+        <if test="className != null and className != ''">class_name,</if>
+        <if test="loadModel != null ">load_model,</if>
+        <if test="serialModel != null">serial_model,</if>
+        <if test="createUser != null and createUser != ''">create_user,</if>
+        create_time,
+        update_time
+        )values(
+        <if test="companyName != null and companyName != ''">#{companyName},</if>
+        <if test="className != null and className != ''">#{className},</if>
+        <if test="loadModel != null">#{loadModel},</if>
+        <if test="serialModel != null">#{serialModel},</if>
+        <if test="createUser != null and createUser != ''">#{createUser},</if>
+        sysdate(),
+        sysdate()
+        )
+    </insert>
+
+</mapper>

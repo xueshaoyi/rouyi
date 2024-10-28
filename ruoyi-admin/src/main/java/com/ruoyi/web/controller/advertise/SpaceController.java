@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.company;
+package com.ruoyi.web.controller.advertise;
 
 import com.ruoyi.advertise.domain.AdvSpace;
 import com.ruoyi.advertise.service.impl.SpaceService;

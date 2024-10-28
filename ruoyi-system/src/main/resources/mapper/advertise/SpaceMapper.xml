@@ -2,12 +2,17 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.advertise.mapper.CompanyMapper">
+<mapper namespace="com.ruoyi.advertise.mapper.SpaceMapper">
 
-    <resultMap type="AdvCompany" id="AdvCompanyResult">
+    <resultMap type="AdvSpace" id="AdvSpaceResult">
         <id     property="id"     column="id"     />
-        <result property="companyName"   column="company_name"   />
-        <result property="className"   column="class_name"   />
+        <result property="advId"   column="adv_id"   />
+        <result property="appId"   column="app_id"   />
+        <result property="advName"   column="adv_name"   />
+        <result property="advPlatform"   column="adv_platform"   />
+        <result property="advType"   column="adv_type"   />
+        <result property="distributton"   column="distributton"   />
+        <result property="projectPlatform"   column="project_platform"   />
         <result property="isDelete"     column="is_delete"      />
         <result property="createUser"   column="create_user"   />
         <result property="createTime" column="create_time" />
@@ -15,55 +20,72 @@
         <result property="updateTime" column="update_time" />
     </resultMap>
 
-    <sql id="selectAdvCompanyVo">
+    <sql id="selectAdvSpaceVo">
         select *
-        from adv_company
+        from adv_space
     </sql>
-    <update id="updateCompany">
-        update adv_company
+    <update id="updateSpace">
+        update adv_space
         <set>
-            <if test="companyName != null and companyName != ''">company_name = #{companyName},</if>
-            <if test="className != null and className != ''">class_name = #{className},</if>
+            <if test="advId != null and advId != ''">adv_id = #{advId},</if>
+            <if test="appId != null and appId != ''">app_id = #{appId},</if>
+            <if test="advName != null and advName != ''">adv_name = #{advName},</if>
+            <if test="advPlatform != null">adv_platform = #{advPlatform},</if>
+            <if test="advType != null ">adv_type = #{advType},</if>
+            <if test="distributton != null ">distributton = #{distributton},</if>
+            <if test="projectPlatform != null and projectPlatform != ''">project_platform = #{projectPlatform},</if>
+            <if test="isDelete != null ">is_delete = #{isDelete},</if>
             <if test="updateUser != null and updateUser != ''">update_user = #{updateUser},</if>
             update_time = sysdate()
         </set>
         where id = #{id}
     </update>
 
-    <select id="selectCompanyList" parameterType="AdvCompany" resultMap="AdvCompanyResult">
-        <include refid="selectAdvCompanyVo"/>
+    <select id="selectSpaceList" parameterType="AdvSpace" resultMap="AdvSpaceResult">
+        <include refid="selectAdvSpaceVo"/>
         <where>
-            <if test="companyName != null and companyName != ''">
-                AND company_name like concat('%', #{companyName}, '%')
+            <if test="advType != null">
+                AND adv_type = #{advType}
             </if>
-            <if test="className != null and className != ''">
-                AND class_name like concat('%', #{className}, '%')
+            <if test="advPlatform != null">
+                AND adv_platform like concat('%', #{advPlatform}, '%')
             </if>
-            and is_delete = 0
+            <if test="projectPlatform != null">
+                AND project_platform like concat('%', #{projectPlatform}, '%')
+            </if>
         </where>
     </select>
-    <select id="getCompanyById" resultMap="AdvCompanyResult">
-        <include refid="selectAdvCompanyVo"></include>
+    <select id="getSpaceById" resultMap="AdvSpaceResult">
+        <include refid="selectAdvSpaceVo"></include>
         <where>
             id = #{id}
         </where>
     </select>
 
-    <delete id="deleteCompanyById" parameterType="Long">
-        update adv_company set is_delete = 1 where id = #{id}
+    <delete id="deleteSpaceById" parameterType="Long">
+        delete from adv_space  where id = #{id}
     </delete>
 
-
-    <insert id="insertCompany" parameterType="AdvCompany">
-        insert into adv_company(
-        <if test="companyName != null and companyName != ''">company_name,</if>
-        <if test="className != null and className != ''">class_name,</if>
+    <insert id="insertSpace" parameterType="AdvSpace">
+        insert into adv_space(
+        <if test="advId != null and advId != ''">adv_id,</if>
+        <if test="appId != null and appId != ''">app_id,</if>
+        <if test="advName != null and advName != ''">adv_name,</if>
+        <if test="advPlatform != null">adv_platform,</if>
+        <if test="advType != null ">adv_type,</if>
+        <if test="distributton != null">distributton,</if>
+        <if test="projectPlatform != null and projectPlatform != ''">project_platform,</if>
         <if test="createUser != null and createUser != ''">create_user,</if>
         create_time,
         update_time
         )values(
-        <if test="companyName != null and companyName != ''">#{companyName},</if>
-        <if test="className != null and className != ''">#{className},</if>
+        <if test="advId != null and advId != ''">#{advId},</if>
+        <if test="appId != null and appId != ''">#{appId},</if>
+        <if test="advName != null and advName != ''">#{advName},</if>
+        <if test="advPlatform != null">#{advPlatform},</if>
+        <if test="advType != null">#{advType},</if>
+        <if test="distributton != null">#{distributton},</if>
+        <if test="projectPlatform != null and projectPlatform != ''">#{projectPlatform},</if>
         <if test="createUser != null and createUser != ''">#{createUser},</if>
         sysdate(),
         sysdate()

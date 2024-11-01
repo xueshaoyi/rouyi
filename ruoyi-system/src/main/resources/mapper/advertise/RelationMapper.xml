@@ -47,6 +47,9 @@
             id = #{id}
         </where>
     </select>
+    <select id="selectRelationByCompanyId" parameterType="AdvRelation" resultMap="AdvRelationResult">
+        select * from adv_relation where company_id = #{companyId} and is_delete = 0;
+    </select>
 
     <delete id="deleteRelationById" parameterType="Long">
         delete from adv_relation  where id = #{id}

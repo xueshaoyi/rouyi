@@ -15,4 +15,6 @@ public interface RelationMapper {
     AdvRelation getRelationById(Long id);
 
     int updateRelation(AdvRelation relation);
+
+    List<AdvRelation> selectRelationByCompanyId(Long companyId);
 }

@@ -38,4 +38,10 @@ public class SpaceService implements ISpaceService {
     public int updateSpace(AdvSpace space) {
         return spaceMapper.updateSpace(space);
     }
+
+    @Override
+    public List<AdvSpace> selectSpaceBySpaceId(Long spaceId, String projectPlatform) {
+        return spaceMapper.selectSpaceByIdAndPlatform(spaceId, projectPlatform);
+    }
+
 }

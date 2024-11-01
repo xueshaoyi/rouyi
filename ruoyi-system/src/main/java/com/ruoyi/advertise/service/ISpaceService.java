@@ -14,4 +14,6 @@ public interface ISpaceService {
     void deleteSpaceById(Long id);
 
     int updateSpace(AdvSpace space);
+
+    List<AdvSpace> selectSpaceBySpaceId(Long spaceId, String platform);
 }

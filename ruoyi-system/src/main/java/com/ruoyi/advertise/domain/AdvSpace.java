@@ -10,7 +10,7 @@ public class AdvSpace extends BaseEntity {
     private String advId;
     private String advName;
     private String appId;
-    private String advPlatform;
+    private Integer advPlatform;
     private Integer advType;
     private Integer distributton;
     private String projectPlatform;
@@ -68,11 +68,11 @@ public class AdvSpace extends BaseEntity {
         this.advName = advName;
     }
 
-    public String getAdvPlatform() {
+    public Integer getAdvPlatform() {
         return advPlatform;
     }
 
-    public void setAdvPlatform(String advPlatform) {
+    public void setAdvPlatform(Integer advPlatform) {
         this.advPlatform = advPlatform;
     }
 

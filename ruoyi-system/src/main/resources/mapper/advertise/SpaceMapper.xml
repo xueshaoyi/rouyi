@@ -61,6 +61,13 @@
             id = #{id}
         </where>
     </select>
+    <select id="selectSpaceByIdAndPlatform" parameterType="AdvSpace" resultMap="AdvSpaceResult">
+        <include refid="selectAdvSpaceVo"></include>
+        <where>
+            id = #{id}
+            and project_platform = #{projectPlatform}
+        </where>
+    </select>
 
     <delete id="deleteSpaceById" parameterType="Long">
         delete from adv_space  where id = #{id}

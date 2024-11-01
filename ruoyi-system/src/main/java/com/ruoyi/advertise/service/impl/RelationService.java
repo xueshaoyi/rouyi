@@ -45,6 +45,6 @@ public class RelationService implements IRelationService {
 
     @Override
     public List<AdvRelation> selectRelationByCompanyId(Long companyId) {
-        return List.of();
+        return relationMapper.selectRelationByCompanyId(companyId);
     }
 }

@@ -118,22 +118,16 @@
         <el-form-item label="广告名称" prop="advName">
           <el-input v-model="form.advName" placeholder="请输入广告位名称" />
         </el-form-item>
-        <el-form-item label="appId" prop="advId">
-          <el-input v-model="form.appId" placeholder="请输入包名" />
-        </el-form-item>
-        <el-form-item label="广告位Id" prop="advId">
-          <el-input v-model="form.advId" placeholder="请输入包名" />
-        </el-form-item>
-        <el-form-item label="广告类型">
+        <el-form-item label="上架渠道">
           <el-select
-            v-model="form.advType"
-            placeholder="广告类型"
+            v-model="form.projectPlatform"
+            placeholder="上架渠道"
             clearable
             size="small"
             style="width: 240px"
           >
             <el-option
-              v-for="dict in dict.type.adv_space_type"
+              v-for="dict in dict.type.adv_project_platform"
               :key="dict.value"
               :label="dict.label"
               :value="dict.value"
@@ -156,16 +150,22 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="上架渠道">
+        <el-form-item label="appId" prop="advId">
+          <el-input v-model="form.appId" placeholder="请输入appId" />
+        </el-form-item>
+        <el-form-item label="广告位Id" prop="advId">
+          <el-input v-model="form.advId" placeholder="请输入广告位Id" />
+        </el-form-item>
+        <el-form-item label="广告类型">
           <el-select
-            v-model="form.projectPlatform"
-            placeholder="上架渠道"
+            v-model="form.advType"
+            placeholder="广告类型"
             clearable
             size="small"
             style="width: 240px"
           >
             <el-option
-              v-for="dict in dict.type.adv_project_platform"
+              v-for="dict in dict.type.adv_space_type"
               :key="dict.value"
               :label="dict.label"
               :value="dict.value"
@@ -173,7 +173,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="分配比例" prop="distributton">
-          <el-input v-model="form.distributton" placeholder="请输入包名" />
+          <el-input v-model="form.distributton" placeholder="请输入分配比例" />
         </el-form-item>
         <el-form-item label="是否启用">
           <el-select

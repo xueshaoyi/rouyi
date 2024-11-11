@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.advertise.mapper.SuggestionMapper">
+
+    <resultMap type="MySuggestion" id="MySuggestionResult">
+        <id     property="id"     column="id"     />
+        <result property="suggestion"   column="suggestion"   />
+        <result property="userName"   column="user_name"   />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="selectMySuggestion">
+        select *
+        from my_suggestion
+    </sql>
+
+    <insert id="insertSuggestion" parameterType="MySuggestion">
+        insert into my_suggestion(
+        <if test="userName != null and userName != ''">user_name,</if>
+        <if test="suggestion != null and suggestion != ''">suggestion,</if>
+        create_time
+        )values(
+        <if test="userName != null and userName != ''">#{userName},</if>
+        <if test="suggestion != null and suggestion != ''">#{suggestion},</if>
+        sysdate()
+        )
+    </insert>
+    <select id="getAllSuggestion" parameterType="MySuggestion" resultMap="MySuggestionResult">
+        select *
+        from my_suggestion
+    </select>
+
+</mapper>

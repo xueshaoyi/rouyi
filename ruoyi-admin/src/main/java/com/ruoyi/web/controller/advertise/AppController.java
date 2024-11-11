@@ -3,9 +3,11 @@ package com.ruoyi.web.controller.advertise;
 import com.ruoyi.advertise.domain.AdvCompany;
 import com.ruoyi.advertise.domain.AdvRelation;
 import com.ruoyi.advertise.domain.AdvSpace;
+import com.ruoyi.advertise.domain.MySuggestion;
 import com.ruoyi.advertise.service.impl.CompanyService;
 import com.ruoyi.advertise.service.impl.RelationService;
 import com.ruoyi.advertise.service.impl.SpaceService;
+import com.ruoyi.advertise.service.impl.SuggestionService;
 import com.ruoyi.common.core.domain.advertise.AdvPlatform;
 import com.ruoyi.common.core.domain.advertise.AdvPlatformIds;
 import com.ruoyi.common.core.domain.advertise.TwbgAdvertise;
@@ -13,9 +15,7 @@ import com.ruoyi.common.core.page.Response;
 import com.ruoyi.common.core.page.TwbgDataUtil;
 import io.jsonwebtoken.lang.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,8 @@ public class AppController {
     private RelationService relationService;
     @Autowired
     private SpaceService spaceService;
+    @Autowired
+    private SuggestionService suggestionService;
 
     @GetMapping("/data")
     public Response getAdvertise(String companyId, String platform, String className) {
@@ -56,6 +58,11 @@ public class AppController {
         }
         advertise.setPlatform(platforms);
         return TwbgDataUtil.makeResponse(advertise);
+    }
+
+    @PostMapping("/suggestion")
+    public void suggestion(@RequestBody MySuggestion suggestion) {
+        suggestionService.saveSuggestion(suggestion);
     }
 
     private List<AdvPlatformIds> spaceToPlatformIds(List<AdvSpace> advSpaces) {

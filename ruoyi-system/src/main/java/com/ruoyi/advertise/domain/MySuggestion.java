@@ -8,6 +8,7 @@ public class MySuggestion extends BaseEntity {
     private Long id;
     private String userName;
     private String suggestion;
+    private String appName;
     private Date createTime;
 
     public Long getId() {
@@ -42,5 +43,13 @@ public class MySuggestion extends BaseEntity {
     @Override
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
     }
 }

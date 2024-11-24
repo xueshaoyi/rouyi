@@ -8,6 +8,7 @@
         <id     property="id"     column="id"     />
         <result property="suggestion"   column="suggestion"   />
         <result property="userName"   column="user_name"   />
+        <result property="appName"   column="app_name"   />
         <result property="createTime" column="create_time" />
         <result property="updateTime" column="update_time" />
     </resultMap>
@@ -20,10 +21,12 @@
     <insert id="insertSuggestion" parameterType="MySuggestion">
         insert into my_suggestion(
         <if test="userName != null and userName != ''">user_name,</if>
+        <if test="appName != null and appName != ''">app_name,</if>
         <if test="suggestion != null and suggestion != ''">suggestion,</if>
         create_time
         )values(
         <if test="userName != null and userName != ''">#{userName},</if>
+        <if test="appName != null and appName != ''">#{appName},</if>
         <if test="suggestion != null and suggestion != ''">#{suggestion},</if>
         sysdate()
         )
